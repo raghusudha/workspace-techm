@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>person management</title>
+    </head>
+    <body>
+        <script>
+          getPerson=function(){
+              var personList=[];
+           if(localStorage.getItem('persons')!=null){
+         personList=JSON.parse(localStorage.getItem('persons'));
+ }
+return personList;
+}
+addPerson=function(name,email,id,phone,address){
+    
+    var personList=getPerson();
+   var person={};
+  person.name=name;
+  person.email=email;
+  person.id=id;
+  person.phone=phone;
+  person.address=address;
+  personList.push(person);
+ localStorage.setItem('persons',JSON.stringify(personList));
+ console.log('name:'+name);
+ console.log('email:'+email);
+ console.log('id:'+id);
+ console.log('phone:'+phone);
+ console.log('address:'+address);
+  
+  }
+  
+  deleteallPerson=function(){
+     localStorage.clear('persons');
+  }
+  showPerson=function(){
+      var personList=getPerson();
+      console.log("total persons:"+personList.length);
+      if(personList.length>0){
+          console.log(personList.length);
+          for(var i=0;i<personList.length;i++){
+              console.log(personList[i].name,personList[i].email,personList[i].id,personList[i].phone,personList[i].address)
+          }
+
+      }
+      }
+      deleteLastPerson=function(){
+          var personList=getPerson();
+          personList.pop();
+          localStorage.setItem('persons',JSON.stringify(personList));
+
+      }
+  
+  
+  //addPerson('sudha','sudha@gmail.com',12234,'1222222','india');
+
+            </script>
+
+
+        <form>
+        
+        <button type="button" onclick="deleteLastPerson()" >DELETE LAST PERSON</button> | <button type="button" onclick="showPerson()">SHOW PERSON</button> |     <button type="button" onclick="deleteallPerson()">DELETE ALL PERSON</button>
+        <hr>
+        <input type="text" value="" placeholder="enter name" name="name2"><br></br>
+        <input type="text" value="" placeholder="enter email" name="email"><br></br>
+        <input type="text" value="" placeholder="enter id" name="id1"><br></br>
+        <input type="text" value="" placeholder="enter phone" name="phone"><br></br>
+        <input type="text" value="" placeholder="enter address" name="address"><br></br>
+        
+        <input type="button" onclick="addPerson(name2.value,email.value,id1.value,phone.value,address.value)" value="ADD PERSON"></button>
+    </form>
+    </body>
+</html>
